@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>Big Tune Radio</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+body {
+  margin:0;
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  padding:25px 15px;
+}
+.app {
+  max-width:430px;
+  margin:auto;
+  background:#111;
+  border:2px solid #c49a3a;
+  border-radius:20px;
+  padding:25px 18px;
+}
+.logo {
+  color:#e4bd62;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin:20px 0;
+}
+.tagline {
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:30px;
+}
+button,.contact {
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  padding:17px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:bold;
+  margin:15px 0;
+  text-decoration:none;
+}
+#play {
+  background:#c49a3a;
+  color:#111;
+  border:0;
+}
+.contact {
+  border:1px solid #c49a3a;
+  color:#e4bd62;
+}
+.now {
+  background:#222;
+  padding:20px;
+  border-radius:10px;
+  margin-top:20px;
+}
+h3 {color:#e4bd62;}
+.footer {
+  color:#e4bd62;
+  margin-top:30px;
+  letter-spacing:3px;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="logo">BIG TUNE RADIO</div>
+  <div class="tagline">REAL MUSIC. REAL DJs. REAL RADIO.</div>
+
+  <button id="play">▶ LISTEN LIVE</button>
+  <audio id="radio" preload="none"></audio>
+
+  <div class="now">
+    <h3>NOW PLAYING</h3>
+    <p id="status">Big Tune Radio — Live</p>
+  </div>
+
+  <a class="contact"
+  href="mailto:bigtuneradio336@gmail.com?subject=Big%20Tune%20Radio">
+  ✉ CONTACT BIG TUNE RADIO
+  </a>
+
+  <div class="footer">TUNE IN. TURN UP.</div>
+</div>
+
+<script>
+const radio = document.getElementById("radio");
+const play = document.getElementById("play");
+const status = document.getElementById("status");
+
+const stream =
+"http://s7.voscast.com:10438/;stream.mp3?sid=1";
+
+play.onclick = async function() {
+  if (radio.paused) {
+    status.textContent = "Connecting...";
+    radio.src = stream;
+    try {
+      await radio.play();
+      play.textContent = "Ⅱ PAUSE";
+      status.textContent = "You're listening live!";
+    } catch(error) {
+      status.textContent =
+      "Stream connection needs a secure HTTPS address.";
+    }
+  } else {
+    radio.pause();
+    play.textContent = "▶ LISTEN LIVE";
+    status.textContent = "Radio paused.";
+  }
+};
+radio.onerror = function() {
+  status.textContent = "Unable to connect to radio stream.";
+  play.textContent = "▶ LISTEN LIVE";
+};
+</script>
+</body>
+</html>
