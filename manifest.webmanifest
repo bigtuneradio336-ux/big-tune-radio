@@ -1,0 +1,11 @@
+
+{
+  "name": "Big Tune Radio",
+  "short_name": "Big Tune",
+  "description": "Real Music. Real DJs. Real Radio.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101010",
+  "theme_color": "#C49A3A"
+}
